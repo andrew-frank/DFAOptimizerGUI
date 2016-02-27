@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DFALearnerController">
+   <bottom>
+      <HBox nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
+         <children>
+            <ProgressBar fx:id="progressBar" nodeOrientation="LEFT_TO_RIGHT" prefHeight="23.0" prefWidth="281.0" progress="0.0" />
+            <Text fx:id="statusText" strokeType="OUTSIDE" strokeWidth="0.0" text="The optimiser is idle" wrappingWidth="500.7587890625" />
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <SplitPane dividerPositions="0.44103072348860256" BorderPane.alignment="CENTER">
+              <items>
+                  <BorderPane prefHeight="678.0" prefWidth="441.0" SplitPane.resizableWithParent="false">
+                     <bottom>
+                        <HBox BorderPane.alignment="CENTER">
+                           <children>
+                              <Pane prefHeight="31.0" prefWidth="50.0" />
+                              <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadAutomatonAction" text="Load DFA" />
+                              <Pane prefHeight="31.0" prefWidth="55.0" />
+                              <Button fx:id="learnButton" mnemonicParsing="false" onAction="#learnAutomatonAction" text="Learn" />
+                              <Pane prefHeight="31.0" prefWidth="56.0" />
+                              <Button fx:id="testButton" mnemonicParsing="false" onAction="#performTest" text="Test" />
+                           </children>
+                        </HBox>
+                     </bottom>
+                     <center>
+                        <VBox BorderPane.alignment="CENTER">
+                           <children>
+                              <BorderPane prefHeight="100.0" prefWidth="200.0">
+                                 <center>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="AWESOME DFA G3NERATOR" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Text>
+                                 </center>
+                                 <bottom>
+                                    <Separator prefWidth="200.0" BorderPane.alignment="CENTER" />
+                                 </bottom>
+                              </BorderPane>
+                              <Accordion>
+                                <panes>
+                                  <TitledPane animated="false" prefHeight="332.0" prefWidth="472.0" text="PSO Settings">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="439.0">
+                                             <children>
+                                                <GridPane prefHeight="250.0" prefWidth="555.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="176.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="47.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Iterations: " />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Particle number: " GridPane.rowIndex="2" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Velocity weight: " GridPane.rowIndex="3" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pers. best weight: " GridPane.rowIndex="4" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Allowed time (mins): " GridPane.rowIndex="1" />
+                                                      <Slider fx:id="allowedTimeSlider" blockIncrement="1.0" max="300.0" min="1.0" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="iterationsNoTextField" prefHeight="31.0" prefWidth="64.0" GridPane.columnIndex="2" />
+                                                      <TextField fx:id="allowedTimeTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="particleNumberTextField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                      <TextField fx:id="velocityWeightTextField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                      <TextField fx:id="persBestWeightTextField" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                      <Slider fx:id="iterationNoSlider" max="5000.0" min="1.0" value="2000.0" GridPane.columnIndex="1" />
+                                                      <Slider fx:id="particleNumberSlider" max="500.0" min="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Slider fx:id="velocityWeightSlider" blockIncrement="0.1" max="20.0" value="2.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <Slider fx:id="persBestWeightSlider" max="20.0" value="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Global weight" GridPane.rowIndex="5" />
+                                                      <Slider fx:id="globalBestWeightSlider" blockIncrement="0.1" max="20.0" value="2.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                      <TextField fx:id="globalBestWeightTextField" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </TitledPane>
+                                  <TitledPane animated="false" prefHeight="150.0" text="Learning word generator settings">
+                                    <content>
+                                      <AnchorPane prefHeight="100.0" prefWidth="555.0">
+                                             <children>
+                                                <GridPane layoutX="92.0" layoutY="36.0" prefHeight="100.0" prefWidth="555.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="152.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="199.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="64.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max word length: " />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max word number: " GridPane.rowIndex="1" />
+                                                      <Slider fx:id="maxWordLengthSlider" blockIncrement="1.0" majorTickUnit="3.0" max="15.0" min="1.0" minorTickCount="1" value="7.0" GridPane.columnIndex="1" />
+                                                      <Slider fx:id="maxWordNumberSlider" max="100000.0" min="1.0" value="5000.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="maxWordLengthTextField" GridPane.columnIndex="2" />
+                                                      <TextField fx:id="maxWordNumberTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </TitledPane>
+                                    <TitledPane animated="false" prefHeight="150.0" text="Test Word generator settings">
+                                       <content>
+                                          <AnchorPane prefHeight="100.0" prefWidth="555.0">
+                                             <children>
+                                                <GridPane layoutX="92.0" layoutY="36.0" prefHeight="100.0" prefWidth="555.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max word length: " />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max word number: " GridPane.rowIndex="1" />
+                                                      <Slider fx:id="maxWordLengthSliderTest" blockIncrement="1.0" majorTickUnit="3.0" max="15.0" min="1.0" minorTickCount="1" value="7.0" GridPane.columnIndex="1" />
+                                                      <Slider fx:id="maxWordNumberSliderTest" max="100000.0" min="1.0" value="5000.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="maxWordLengthTextFieldTest" GridPane.columnIndex="2" />
+                                                      <TextField fx:id="maxWordNumberTextFieldTest" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                   </children>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="152.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="199.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="64.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </TitledPane>
+                                </panes>
+                              </Accordion>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+                  <TabPane fx:id="tabPane" prefHeight="678.0" prefWidth="560.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab fx:id="loadedTextAreaTab" text="Loaded DFA">
+                           <content>
+                              <TextArea fx:id="loadedTextArea" editable="false">
+                                 <font>
+                                    <Font name="Monospaced Regular" size="14.0" />
+                                 </font>
+                              </TextArea>
+                           </content>
+                        </Tab>
+                      <Tab fx:id="learnedTextAreaTab" text="Learned DFA">
+                           <content>
+                              <TextArea fx:id="learnedDFAText" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Click learn to load. ">
+                                 <font>
+                                    <Font name="Monospaced Regular" size="14.0" />
+                                 </font></TextArea>
+                           </content>
+                        </Tab>
+                        <Tab text="Test results">
+                          <content>
+                            <AnchorPane fx:id="testResultsTab" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextArea fx:id="testResultsText" editable="false" layoutX="80.0" layoutY="208.0" prefHeight="639.0" prefWidth="560.0" text="Learn the DFA to test. " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children></AnchorPane>
+                          </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+              </items>
+            </SplitPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
